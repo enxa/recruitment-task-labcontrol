@@ -29,13 +29,14 @@
 
   const findPhotos = () => {
     router.push({ name: 'photos', params: { searchPhrase: searchPhrase.value } })
+    searchPhrase.value = ''
   }
 </script>
 
 <template>
   <form v-on:submit.prevent="">
       <input type="text" placeholder="Type something..." v-model.trim="searchPhrase" @keydown.enter="findPhotos">
-      <router-link :to="{ name: 'photos', params: { searchPhrase: tag } }" v-for="tag in tags">{{ tag }}</router-link>
+      <a href="#" v-for="tag in tags" @click="findPhotos">{{ tag }}</a>
   </form>
 </template>
 
