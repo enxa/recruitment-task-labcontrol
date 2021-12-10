@@ -1,5 +1,7 @@
 <script setup>
   import SearchPhotos from '../components/SearchPhotos.vue';
+  import ModalPhoto from '../components/ModalPhoto.vue'
+  
   import { ref, defineProps, toRefs, watchEffect } from 'vue'
 
   const clientId = 'uYB88IY7UH3wsQFu9t3lWf5jM01GiTA8l441NSk0r8k'
@@ -9,6 +11,9 @@
 
   let { searchPhrase } = toRefs(props)
   let photos = ref([])
+
+  let selectedPhoto = ref({})
+  let modalIsOpen = ref(false)
 
   watchEffect(async () => {
     if (searchPhrase.value) {
@@ -27,12 +32,23 @@
       })
     }
   })
+
+  let openModal = photo => {
+    selectedPhoto.value = photo
+    modalIsOpen.value = true
+  }
+
+  let closeModal = () => {
+    selectedPhoto.value = {}
+    modalIsOpen.value = false
+  }
 </script>
 
 <template>
   <SearchPhotos />
   <div class="gallery">
-    <img v-for="(photo, i) in photos" :src="photo.img" :alt="i">
+    <img  v-for="(photo, i) in photos" :src="photo.img" :alt="i" @click="openModal(photo)">
+    <ModalPhoto :img="selectedPhoto.img" :tags="selectedPhoto.tags" :user="selectedPhoto.user" :location="selectedPhoto.location" v-if="modalIsOpen" @closeModal="closeModal"/>
   </div>
 </template>
 
