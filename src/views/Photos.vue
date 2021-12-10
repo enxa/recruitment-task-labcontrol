@@ -1,5 +1,6 @@
 <script setup>
-  import { ref, defineProps, toRefs, onMounted } from 'vue'
+  import SearchPhotos from '../components/SearchPhotos.vue';
+  import { ref, defineProps, toRefs, watchEffect } from 'vue'
 
   const clientId = 'uYB88IY7UH3wsQFu9t3lWf5jM01GiTA8l441NSk0r8k'
   const props = defineProps({
@@ -9,19 +10,29 @@
   let { searchPhrase } = toRefs(props)
   let photos = ref([])
 
-  onMounted(async () => {
-    const data = await fetch(`https://api.unsplash.com/search/photos?query=${searchPhrase.value}&client_id=${clientId}`)
-    const json = await data.json()
+  watchEffect(async () => {
+    if (searchPhrase.value) {
+      photos.value = []
+      const data = await fetch(`https://api.unsplash.com/search/photos?query=${searchPhrase.value}&client_id=${clientId}`)
+      const json = await data.json()
 
-    json.results.forEach(result => {
-      photos.value.push(result.urls.small)
-    })
+      json.results.forEach(result => {
+        console.log(result)
+        photos.value.push({
+          img: result.urls.small,
+          tags: result.tags,
+          user: result.user.name,
+          location: result.user.location
+        })
+      })
+    }
   })
 </script>
 
 <template>
+  <SearchPhotos />
   <div class="gallery">
-    <img v-for="(photo, i) in photos" :src="photo" :alt="i">
+    <img v-for="(photo, i) in photos" :src="photo.img" :alt="i">
   </div>
 </template>
 
