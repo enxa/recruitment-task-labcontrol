@@ -1,6 +1,8 @@
 <script setup>
   import { ref, watchEffect } from 'vue'
+  import { useRouter } from 'vue-router'
 
+  const router = useRouter()
   const clientId = 'uYB88IY7UH3wsQFu9t3lWf5jM01GiTA8l441NSk0r8k'
   let searchPhrase = ref('')
   let tags = ref([])
@@ -24,18 +26,27 @@
       tags.value = []
     }
   })
+
+  const findPhotos = () => {
+    router.push({ name: 'photos', params: { searchPhrase: searchPhrase.value } })
+  }
 </script>
 
 <template>
   <form v-on:submit.prevent="">
-      <input type="text" placeholder="Type something..." v-model.trim="searchPhrase">
-      <div v-for="tag in tags">
-        <router-link :to="{ name: 'photos', params: {searchPhrase: tag } }">{{ tag }}</router-link>
-      </div>
+      <input type="text" placeholder="Type something..." v-model.trim="searchPhrase" @keydown.enter="findPhotos">
+      <router-link :to="{ name: 'photos', params: { searchPhrase: tag } }" v-for="tag in tags">{{ tag }}</router-link>
   </form>
-
-  <hr>
-  {{searchPhrase}}
-  {{tags}}
 </template>
+
+<style scoped>
+  form {
+    display: flex;
+    flex-flow: column nowrap;
+    width: 100%;
+    max-width: 400px;
+    margin: 10px;
+    background: #fff;
+  }
+</style>
 

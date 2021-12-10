@@ -25,7 +25,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
   .gallery {
     display: flex;
     flex-flow: column wrap;
