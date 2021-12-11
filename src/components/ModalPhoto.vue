@@ -1,6 +1,8 @@
 <script setup>
-  import { defineProps, defineEmits, toRefs } from 'vue'
+  import { defineEmits, defineProps, toRefs } from 'vue'
 
+  const emit = defineEmits(['closeModal'])
+  
   const props = defineProps({
     image: String,
     tags: Array,
@@ -10,7 +12,6 @@
 
   let { image, tags, user, location } = toRefs(props)
 
-  const emit = defineEmits(['closeModal'])
 
   const closeModal = () => emit('closeModal')
 </script>
@@ -71,5 +72,11 @@
         border: 1px solid #000;
         padding: .5vw;
         margin: .5vw;
+      }
+      .tag:first-child {
+        margin-left: 0;
+      }
+      .tag:last-child {
+        margin-right: 0;
       }
 </style>
