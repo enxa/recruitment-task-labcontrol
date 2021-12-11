@@ -27,26 +27,46 @@
     }
   })
 
-  const findPhotos = () => {
-    router.push({ name: 'photos', params: { searchPhrase: searchPhrase.value } })
+  const findPhotos = phrase => {
+    router.push({ name: 'photos', params: { searchPhrase: phrase } })
     searchPhrase.value = ''
   }
 </script>
 
 <template>
-  <form v-on:submit.prevent="">
-      <input type="text" placeholder="Type something..." v-model.trim="searchPhrase" @keydown.enter="findPhotos">
-      <a href="#" v-for="tag in tags" @click="findPhotos">{{ tag }}</a>
-  </form>
+  <section>
+    <form>
+      <input type="text" placeholder="Type something..." v-model.trim="searchPhrase" @keydown.enter="findPhotos(searchPhrase)">
+      <div class="tags">
+        <a class="tag" href="#" v-for="tag in tags" @click="findPhotos(tag)">{{ tag }}</a>
+      </div>
+    </form>
+  </section>
 </template>
 
 <style scoped>
-  form {
-    display: flex;
-    flex-flow: column nowrap;
-    width: 100%;
-    max-width: 400px;
-    margin: 10px;
-    background: #fff;
-  }
+    form {
+      position: relative;
+    }
+      input {
+        width: 100%;
+        width: 50vw; 
+        padding: 1vw;
+      }
+      .tags {
+        position: absolute;
+        display: flex;
+        flex-flow: column nowrap;
+        background: #fff;
+        width: 100%;
+      }
+        .tag {
+          padding: 1vh 1vw;
+        }
+        .tag:first-child {
+          padding-top: 2vh 1vw;
+        }
+        .tag:last-child {
+          padding-bottom: 2vh 1vw;
+        }
 </style>

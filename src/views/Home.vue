@@ -3,5 +3,16 @@
 </script>
 
 <template>
-  <SearchPhotos />
+  <section class="search-photos">
+    <SearchPhotos />
+  </section>
 </template>
+
+<style scoped>
+  section.search-photos {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 80vh;
+  }
+</style>

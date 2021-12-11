@@ -24,7 +24,8 @@
       json.results.forEach(result => {
         console.log(result)
         photos.value.push({
-          img: result.urls.small,
+          smallImg: result.urls.small,
+          fullImg: result.urls.full,
           tags: result.tags,
           user: result.user.name,
           location: result.user.location
@@ -45,26 +46,33 @@
 </script>
 
 <template>
-  <SearchPhotos />
+  <section class="search-photos">
+    <SearchPhotos />
+  </section>
   <div class="gallery">
-    <img  v-for="(photo, i) in photos" :src="photo.img" :alt="i" @click="openModal(photo)">
-    <ModalPhoto :img="selectedPhoto.img" :tags="selectedPhoto.tags" :user="selectedPhoto.user" :location="selectedPhoto.location" v-if="modalIsOpen" @closeModal="closeModal"/>
+    <img  v-for="(photo, i) in photos" :src="photo.smallImg" :alt="i" @click="openModal(photo)">
+    <ModalPhoto :image="selectedPhoto.fullImg" :tags="selectedPhoto.tags" :user="selectedPhoto.user" :location="selectedPhoto.location" v-if="modalIsOpen" @closeModal="closeModal"/>
   </div>
 </template>
 
 <style scoped>
-  .gallery {
-    display: flex;
-    flex-flow: column wrap;
-    max-height: 150vh;
-    max-width: 1260px;
-    margin: auto;
-    overflow: hidden;
+  section.search-photos {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 20vh;
   }
-    .gallery img {
-      width: 100%;
-      max-width: 400px;
-      margin: 10px;
+    .gallery {
+      display: flex;
+      flex-flow: column wrap;
+      max-height: 150vh;
+      max-width: 1260px;
+      margin: auto;
+      overflow: hidden;
     }
-    
+      .gallery img {
+        width: 100%;
+        max-width: 400px;
+        padding: 1vw;
+      }
 </style>
