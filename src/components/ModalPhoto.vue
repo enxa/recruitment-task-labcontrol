@@ -1,8 +1,6 @@
 <script setup>
-  import { defineEmits, defineProps, toRefs } from 'vue'
+  import { defineProps, toRefs, defineEmits } from 'vue'
 
-  const emit = defineEmits(['closeModal'])
-  
   const props = defineProps({
     image: String,
     tags: Array,
@@ -12,6 +10,7 @@
 
   let { image, tags, user, location } = toRefs(props)
 
+  const emit = defineEmits(['closeModal'])
 
   const closeModal = () => emit('closeModal')
 </script>
@@ -19,14 +18,18 @@
 <template scoped>
   <section @click.self="closeModal">
     <div class="modal">
+      <div class="btn-close-modal" @click.self="closeModal">
+        ×
+      </div>
+      <br>
       <div class="image" :style="{ backgroundImage: 'url(' + image + ')' }">
         <div class="loader">Loading...</div>
       </div>
       <div class="tags">
-        <div class="tag" v-for="tag in tags">{{ tag.title }}</div>
+        <p class="tag" v-for="tag in tags">{{ tag.title }}</p>
       </div>
-      <h1>{{ user }}</h1>
-      <h4>{{ location }}</h4>
+      <h5>{{ user }}</h5>
+      <p>{{ location }}</p>
     </div>
   </section>
 </template>
@@ -47,6 +50,11 @@
       background: #fff;
       padding: 2vw;
     }
+      .btn-close-modal {
+        font-size: 3rem;
+        float: right;
+        cursor: pointer;
+      }
       .image {
         background-repeat: no-repeat;
         background-position: bottom center;
@@ -70,13 +78,16 @@
     
       .tag {
         border: 1px solid #000;
-        padding: .5vw;
-        margin: .5vw;
+        padding: .25vh .5vw;
+        margin: 2.5vh .5vw;
       }
       .tag:first-child {
         margin-left: 0;
       }
       .tag:last-child {
         margin-right: 0;
+      }
+      .modal > p:first-letter {
+        text-transform:capitalize;
       }
 </style>

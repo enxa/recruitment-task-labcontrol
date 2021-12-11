@@ -22,7 +22,6 @@
         const json = await data.json()
 
         json.results.forEach(result => {
-          console.log(result)
           photos.value.push({
             smallImg: result.urls.small,
             fullImg: result.urls.full,
@@ -81,5 +80,6 @@
       width: 100%;
       max-width: 400px;
       padding: 1vw;
+      cursor: pointer;
     }  
 </style>
