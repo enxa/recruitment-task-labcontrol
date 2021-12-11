@@ -18,18 +18,13 @@
 <template scoped>
   <section @click.self="closeModal">
     <div class="modal">
-      <div class="btn-close-modal" @click.self="closeModal">
-        ×
-      </div>
-      <br>
-      <div class="image" :style="{ backgroundImage: 'url(' + image + ')' }">
-        <div class="loader">Loading...</div>
-      </div>
+      <div class="btn-close-modal" @click.self="closeModal">×</div>
+      <h5>{{ user }}</h5>
+      <p>{{ location }}</p>
       <div class="tags">
         <p class="tag" v-for="tag in tags">{{ tag.title }}</p>
       </div>
-      <h5>{{ user }}</h5>
-      <p>{{ location }}</p>
+      <div class="image" :style="{ backgroundImage: 'url(' + image + ')' }"></div>
     </div>
   </section>
 </template>
@@ -57,20 +52,17 @@
       }
       .image {
         background-repeat: no-repeat;
-        background-position: bottom center;
+        background-position: top center;
         background-size: contain;
         height: 100%;
         min-height: 60vh;
         width: 60vw;
         min-width: 400px;
-        margin: 2vw 0;
+        margin: 1vw 0;
         display: grid;
         place-items: center;
         z-index: 1;
       }
-        .loader {
-          z-index: -1;
-        }
 
     .tags {
       display: inline-flex;
@@ -86,6 +78,9 @@
       }
       .tag:last-child {
         margin-right: 0;
+      }
+      .modal > p {
+        padding-top: 1vh;
       }
       .modal > p:first-letter {
         text-transform:capitalize;
