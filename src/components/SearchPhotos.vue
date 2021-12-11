@@ -1,7 +1,7 @@
 <script setup>
   import { ref, watchEffect } from 'vue'
   import { useRouter } from 'vue-router'
-  import { clientId } from '../../env'
+  import { clientId } from '../main'
 
   const router = useRouter()
 

@@ -1,7 +1,7 @@
 <script setup>
   import SearchPhotos from '../components/SearchPhotos.vue';
   import ModalPhoto from '../components/ModalPhoto.vue'
-  import { clientId } from '../../env'
+  import { clientId } from '../main'
   import { ref, defineProps, toRefs, watchEffect } from 'vue'
 
   const props = defineProps({
