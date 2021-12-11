@@ -51,9 +51,10 @@
 <template>
   <section class="search-photos">
     <SearchPhotos />
+    <h4 class="search-phrase">Results for: '{{ searchPhrase }}'</h4>
   </section>
   <section class="gallery">
-    <h1 class="error" v-if="error">Something get wrong...</h1>
+    <h4 class="error" v-if="error">Something get wrong...</h4>
     <img v-else v-for="(photo, i) in photos" :src="photo.smallImg" :alt="i" @click="openModal(photo)">
   </section>
   <section class="modal-photo">
@@ -66,7 +67,7 @@
     display: grid;
     place-items: center;
     width: 100%;
-    height: 20vh;
+    height: 30vh;
   }
   section.gallery {
     display: flex;
