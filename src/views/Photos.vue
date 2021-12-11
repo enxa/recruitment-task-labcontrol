@@ -53,7 +53,7 @@
     <h4 class="search-phrase">Results for: '{{ searchPhrase }}'</h4>
   </section>
   <section class="gallery">
-    <h4 class="error" v-if="error">Something get wrong...</h4>
+    <p class="error" v-if="error">Something get wrong...</p>
     <img v-else v-for="(photo, i) in photos" :src="photo.smallImg" :alt="i" @click="openModal(photo)">
   </section>
   <section class="modal-photo">
