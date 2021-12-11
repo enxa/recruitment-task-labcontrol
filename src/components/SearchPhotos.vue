@@ -57,11 +57,13 @@
         position: absolute;
         display: flex;
         flex-flow: column nowrap;
-        background: #fff;
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(10px);
         width: 100%;
       }
         .tag {
           padding: 1vh 1vw;
+          text-decoration: none;
         }
         .tag:first-child {
           padding-top: 2vh 1vw;

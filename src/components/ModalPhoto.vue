@@ -22,7 +22,7 @@
         <div class="loader">Loading...</div>
       </div>
       <div class="tags">
-        <div v-for="tag in tags">{{ tag.title }}</div>
+        <div class="tag" v-for="tag in tags">{{ tag.title }}</div>
       </div>
       <h1>{{ user }}</h1>
       <h4>{{ location }}</h4>
@@ -67,7 +67,7 @@
       display: inline-flex;
     }
     
-      .tags > * {
+      .tag {
         border: 1px solid #000;
         padding: .5vw;
         margin: .5vw;
