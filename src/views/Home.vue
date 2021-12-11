@@ -1,3 +1,18 @@
+<script setup>
+  import SearchPhotos from '../components/SearchPhotos.vue';
+</script>
+
 <template>
-  <h1>Home</h1>
+  <section class="search-photos">
+    <SearchPhotos />
+  </section>
 </template>
+
+<style scoped>
+  section.search-photos {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 100vh;
+  }
+</style>
